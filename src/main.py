@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
 taskDict={}
 totalTasks=1
 moreTask="yes"
@@ -57,9 +60,22 @@ for value in taskDict.values():
     totalValuePoints+=value["valuePoints"]
     if value["pendingCompleted"]=="yes":
         totalCompletedValuePoints+=value["valuePoints"]
+totalPendingValuePoints=totalValuePoints-totalCompletedValuePoints
 
 print(f"Total Value Points for the day:- {totalValuePoints}")
 print(f"Total Value Points of completed tasks for the day:- {totalCompletedValuePoints}")
 productivity=round((totalCompletedValuePoints/totalValuePoints)*100, 2)
 print(f"Productivity percentage:- {productivity}%")
 
+#plotting graphs
+#pie chart
+x=np.array([totalCompletedValuePoints, totalPendingValuePoints])
+label=["Completed Value Points", "Pending Value Points"]
+plt.pie(x, labels=label)
+plt.show()
+
+#bar graph
+x=np.array(["Completed Value Points", "Pending Value Points"])
+y=np.array([totalCompletedValuePoints, (totalValuePoints-totalCompletedValuePoints)])
+plt.bar(x, y)
+plt.show()
