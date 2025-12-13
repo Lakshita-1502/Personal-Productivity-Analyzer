@@ -2,11 +2,13 @@ import os
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
 
 class Emails:
     def __init__(self, taskObj, valuePointObj):
-        self.emailId=os.getenv("EMAIL_USER")
-        self.emailPassword=os.getenv("EMAIL_PASSWORD")
+        self.emailId=os.getenv("EMAILID")
+        self.emailPassword=os.getenv("EMAILPASSWORD")
         self.taskDict=taskObj.taskDict
         self.totalValuePoints=valuePointObj.totalValuePoints
         self.totalCompletedValuePoints=valuePointObj.totalCompletedValuePoints
@@ -19,7 +21,18 @@ class Emails:
         msg["from"]=self.emailId
         msg["to"]=self.emailId
         html=self.generateMessage()
-        msg.attach(MIMEText(html, "html"))   
+        msg.attach(MIMEText(html, "html", "utf-8")) 
+
+        with open("./report.pdf", "rb") as f:
+            part = MIMEBase("application", "octet-stream")
+            part.set_payload(f.read())
+        encoders.encode_base64(part)
+        filename = os.path.basename("./report.pdf")
+        part.add_header(
+            "Content-Disposition",
+            f'attachment; filename="{filename}"'
+        )
+        msg.attach(part)
 
         s=smtplib.SMTP('smtp.gmail.com', 587)
         s.starttls()

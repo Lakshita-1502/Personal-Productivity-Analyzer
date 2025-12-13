@@ -1,5 +1,4 @@
 from dotenv import load_dotenv
-
 from tasks import Tasks
 from valuePoints import ValuePoints
 from graphs import Graphs
@@ -17,8 +16,8 @@ valuePoint.calculations()
 graph=Graphs(valuePoint)
 graph.plotGraph()
 
-email=Emails(task, valuePoint)
-email.sendEmail()
-
 pdf=Pdfs()
 pdf.create_pdf()
+
+email=Emails(task, valuePoint)
+email.sendEmail()
