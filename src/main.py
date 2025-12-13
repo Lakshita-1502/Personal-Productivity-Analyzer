@@ -3,7 +3,8 @@ from dotenv import load_dotenv
 from tasks import Tasks
 from valuePoints import ValuePoints
 from graphs import Graphs
-from weather.fetchWeather import fetch_weather
+from emails import Emails
+from pdfs import Pdfs
 
 load_dotenv()
 
@@ -16,6 +17,8 @@ valuePoint.calculations()
 graph=Graphs(valuePoint)
 graph.plotGraph()
 
-weather=fetch_weather()
-weather_data=weather.get_weather()
-print(weather_data)
+email=Emails(task, valuePoint)
+email.sendEmail()
+
+pdf=Pdfs()
+pdf.create_pdf()
