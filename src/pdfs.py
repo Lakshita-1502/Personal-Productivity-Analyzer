@@ -5,10 +5,11 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.pagesizes import A4
 
 class Pdfs:
-    def __init__(self):
+    def __init__(self, taskObj):
         self.pdf=SimpleDocTemplate("report.pdf", pagesize=A4)
         self.elements=[]
         self.styles = getSampleStyleSheet()
+        self.taskDict=taskObj.taskDict
 
     def create_pdf(self):
         self.elements=self.createContent()
@@ -21,10 +22,14 @@ class Pdfs:
         ))
         self.elements.append(Spacer(1, 15))
 
-        self.elements.append(Paragraph(
-            "This report contains tasks, analysis, and visual graphs.",
-            self.styles["Normal"]
-        ))
+        for key, value in self.taskDict.items():
+            self.elements.append(Paragraph(
+                f"""<b>Task ID:- {key} </b><br/>
+                Task Description:- {value["taskName"]}<br/>
+                Value Points:- {value["valuePoints"]}<br/>
+                Completed:- {value["pendingCompleted"]}<br/>""",
+                self.styles["Normal"]
+             ))
         self.elements.append(Spacer(1, 20))
 
         self.elements.append(Image("graph.png", width=400, height=250))

@@ -10,10 +10,7 @@ class Emails:
         self.emailId=os.getenv("EMAILID")
         self.emailPassword=os.getenv("EMAILPASSWORD")
         self.taskDict=taskObj.taskDict
-        self.totalValuePoints=valuePointObj.totalValuePoints
-        self.totalCompletedValuePoints=valuePointObj.totalCompletedValuePoints
-        self.totalPendingValuePoints=valuePointObj.totalPendingValuePoints
-        self.productivity=valuePointObj.productivity
+        self.valuePointDict=valuePointObj.valuePointDict
 
     def sendEmail(self):
         msg=MIMEMultipart("alternative")
@@ -45,19 +42,12 @@ class Emails:
         taskDetails="""
         <body style="font-family: Arial; 
                     font-size: 10px; line-height: 1.2; color: #333333">
-        <h2>Today's Task Details are as follows:- <h2>"""
-        for key, value in self.taskDict.items():
-            taskDetails+=f"""
-            <b>Task ID:- {key} </b><br>
-            <p>Task Description:- {value["taskName"]}</p>
-            <p>Value Points:- {value["valuePoints"]}</p>
-            <p>Completed:- {value["pendingCompleted"]}</p>"""
-            
-        taskDetails+=f"""
+        <h3>Your Today's Productivity Analysis is given below:- </h3>
         <p>Today's Total Value Points are:- {self.totalValuePoints}</p>
         <p>Today's Total Completed Value Points are:- {self.totalCompletedValuePoints}</p>
         <p>Today's Total Pending Value Points are:- {self.totalPendingValuePoints}</p>
-        <p>Today's Productivity Ratio:- {self.productivity}</p>"""
-        taskDetails+="<p>You're receiving this system generate today's Summary.<br>© 2025 Personal Productivity Analyzer</p></body>"
+        <p>Today's Productivity Ratio:- {self.productivity}%</p>
+        <p>For further details pls refer to the attached pdf. Thank You!</p>
+        <p>You're receiving this system generate today's Summary.<br>© 2025 Personal Productivity Analyzer</p></body>"""
         return taskDetails
             

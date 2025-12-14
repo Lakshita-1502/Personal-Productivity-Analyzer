@@ -16,7 +16,7 @@ valuePoint.calculations()
 graph=Graphs(valuePoint)
 graph.plotGraph()
 
-pdf=Pdfs()
+pdf=Pdfs(task)
 pdf.create_pdf()
 
 email=Emails(task, valuePoint)
