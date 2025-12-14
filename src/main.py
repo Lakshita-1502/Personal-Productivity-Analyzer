@@ -19,5 +19,5 @@ graph.plotGraph()
 pdf=Pdfs(task)
 pdf.create_pdf()
 
-email=Emails(task, valuePoint)
+email=Emails(valuePoint)
 email.sendEmail()

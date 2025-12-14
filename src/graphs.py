@@ -3,13 +3,12 @@ import numpy as np
 
 class Graphs:
     def __init__(self, valuePointObj):
-        self.totalCompletedValuePoints=valuePointObj.totalCompletedValuePoints
-        self.totalPendingValuePoints=valuePointObj.totalPendingValuePoints
+        self.valuePointDict=valuePointObj.valuePointDict
 
     def plotGraph(self):
-        self.x=np.array([self.totalCompletedValuePoints, self.totalPendingValuePoints])
-        self.label=["Completed Value Points", "Pending Value Points"]
-        plt.pie(self.x, labels=self.label)
+        x=np.array([self.valuePointDict["totalCompletedValuePoints"], self.valuePointDict["totalPendingValuePoints"]])
+        label=["Completed Value Points", "Pending Value Points"]
+        plt.pie(x, labels=label)
         plt.title("Value Point distribution")
         plt.tight_layout()
         plt.savefig("graph.png")

@@ -6,10 +6,9 @@ from email.mime.base import MIMEBase
 from email import encoders
 
 class Emails:
-    def __init__(self, taskObj, valuePointObj):
+    def __init__(self, valuePointObj):
         self.emailId=os.getenv("EMAILID")
         self.emailPassword=os.getenv("EMAILPASSWORD")
-        self.taskDict=taskObj.taskDict
         self.valuePointDict=valuePointObj.valuePointDict
 
     def sendEmail(self):
@@ -39,14 +38,14 @@ class Emails:
         print("Email send successfully")
 
     def generateMessage(self):
-        taskDetails="""
+        taskDetails=f"""
         <body style="font-family: Arial; 
-                    font-size: 10px; line-height: 1.2; color: #333333">
+                    font-size: 12px; line-height: 1.2; color: #333333">
         <h3>Your Today's Productivity Analysis is given below:- </h3>
-        <p>Today's Total Value Points are:- {self.totalValuePoints}</p>
-        <p>Today's Total Completed Value Points are:- {self.totalCompletedValuePoints}</p>
-        <p>Today's Total Pending Value Points are:- {self.totalPendingValuePoints}</p>
-        <p>Today's Productivity Ratio:- {self.productivity}%</p>
+        <p>Today's Total Value Points are:- {self.valuePointDict["totalValuePoints"]}</p>
+        <p>Today's Total Completed Value Points are:- {self.valuePointDict["totalCompletedValuePoints"]}</p>
+        <p>Today's Total Pending Value Points are:- {self.valuePointDict["totalPendingValuePoints"]}</p>
+        <p>Today's Productivity Ratio:- {self.valuePointDict["productivity"]}%</p>
         <p>For further details pls refer to the attached pdf. Thank You!</p>
         <p>You're receiving this system generate today's Summary.<br>© 2025 Personal Productivity Analyzer</p></body>"""
         return taskDetails

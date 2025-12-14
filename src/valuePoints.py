@@ -4,6 +4,8 @@ class ValuePoints:
         self.valuePointDict={}
 
     def calculations(self):
+        totalValuePoints=0
+        totalCompletedValuePoints=0
         for value in self.taskDict.values():
             totalValuePoints+=value["valuePoints"]
             if value["pendingCompleted"]=="yes":
