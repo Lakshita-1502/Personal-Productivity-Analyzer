@@ -4,6 +4,18 @@
     <form method="post">
         <label>Task Description</label>
         <input type="text" name="taskName">
-        <input type="button" value="Add Task">
+        <label>Value Points</label>
+        <input type="text" name="valuePoint">
+        <button type="submit">Add task</button>
+
+        <ul style="list-style: none;">
+            {% for key, value in tasks.items() %}
+                <li>
+                    <input type="checkbox" name="checked_tasks" value="{{ key }}">
+                    {{ key }} - {{ value["description"] }} ({{ value["valuePoints"] }})
+                </li>
+            {% endfor %}
+        </ul>
     </form>
+    
 {% endblock %}
