@@ -1,9 +1,9 @@
 from dotenv import load_dotenv
-from tasks import Tasks
-from valuePoints import ValuePoints
-from graphs import Graphs
-from emails import Emails
-from pdfs import Pdfs
+from console.tasks import Tasks
+from console.valuePoints import ValuePoints
+from console.graphs import Graphs
+from console.emails import Emails
+from console.pdfs import Pdfs
 
 load_dotenv()
 

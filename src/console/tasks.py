@@ -26,6 +26,7 @@ class Tasks:
 
                 else:
                     print("Select a proper choice number")
+                    self.moreTask="no"
 
     def displayChoices(self):
         print("\nPersonal Productivity Manager\n")
