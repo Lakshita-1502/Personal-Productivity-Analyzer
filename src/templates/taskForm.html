@@ -10,15 +10,19 @@
 
         <button type="submit">Add Task</button>
 
+        <p>Total Value Points: <span id="total">0</span></p>
+        <p>Total Completed Value Points: <span id="completed-total">0</span></p>
+        <p>Productivity: <span id="productivity">0</span>%</p>
+
         <ul style="list-style: none;" id="tasklist">  
             {% for key, value in tasks.items() %}               
             <li data-points="{{ value['valuePoints'] }}">
                 <input type="checkbox" class="task-checkbox" data-points="{{ value['valuePoints'] }}">  
                 {{ key }} - {{ value['description'] }} ({{ value['valuePoints'] }})
+                <button type="button" onclick="deleteTask(this)">Delete Task</button>
             </li>
             {% endfor %}
         </ul>
 
-        <p>Total Value Points: <span id="total">0</span></p>
     </form>
 {% endblock %}
