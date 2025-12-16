@@ -11,7 +11,7 @@ def taskForm():
         taskDesc=request.form.get("taskName")
         taskValue=request.form.get("valuePoint")
         if taskDesc:
-            tasks[taskId]={"description": taskDesc, "valuePoints": taskValue}
+            tasks[taskId]={"description": taskDesc, "valuePoints": int(taskValue)}
             taskId+=1
     return render_template('taskForm.html',tasks=tasks)
 
