@@ -7,7 +7,7 @@ function updateTotal() {
 }
 
 function updateCompletedTotal(){
-    let completedTotal=0;
+    let completedTotal=Number(document.getElementById("completed-total").textContent);
     document.querySelectorAll("#tasklist li input.task-checkbox:checked").forEach(cb => {
         completedTotal+=Number(cb.dataset.points);
     });
@@ -31,7 +31,7 @@ function recallAll(){
     calcProductivity();
 }
 
-function deleteTask(){
+function deleteTask(btn){
     const li=btn.closest("li");
     const points=Number(li.dataset.points);
     let total=Number(document.getElementById("total").textContent);
@@ -40,7 +40,14 @@ function deleteTask(){
     document.getElementById("total").textContent=total;
 
     const checkbox=li.querySelector(".task-checkbox");
-    if (checkbox.checked){}
+    if (checkbox.checked){
+        let completed=Number(document.getElementById("completed-total").textContent);
+        completed=completed-points;
+        document.getElementById("completed-total").textContent=completed;
+    }
+
+    li.remove();
+    calcProductivity();
 }
 
 window.addEventListener("DOMContentLoaded", () => {
