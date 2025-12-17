@@ -2,27 +2,54 @@
 
 {% block content %}
     <form method="post">
-        <label for="taskName">Task Description:</label>
-        <input type="text" name="taskName" id="taskName" required>
-
-        <label for="valuePoint">Value Points:</label>
-        <input type="number" name="valuePoint" id="valuePoint" required min="0">
-
+        <input type="text" name="taskName" placeholder="Tasks" required>
+        <input type="number" name="valuePoint" placeholder="Value Points" required min="0">
         <button type="submit">Add Task</button>
-
-        <p>Total Value Points: <span id="total">0</span></p>
-        <p>Total Completed Value Points: <span id="completed-total">0</span></p>
-        <p>Productivity: <span id="productivity">0</span>%</p>
-
-        <ul style="list-style: none;" id="tasklist">  
-            {% for key, value in tasks.items() %}               
-            <li data-points="{{ value['valuePoints'] }}">
-                <input type="checkbox" class="task-checkbox" data-points="{{ value['valuePoints'] }}">  
-                {{ key }} - {{ value['description'] }} ({{ value['valuePoints'] }})
-                <button type="button" onclick="deleteTask(this)">Delete Task</button>
-            </li>
-            {% endfor %}
-        </ul>
-
     </form>
+
+    <hr>
+    <h3>Dashboard:- </h3>
+    <p>Total Value Points: <span id="total">0</span></p>
+    <p>Total Completed Value Points: <span id="completed-total">0</span></p>
+    <p>Productivity: <span id="productivity">0</span>%</p>
+    <hr>
+
+    <ul style="list-style: none;" id="tasklist">  
+        {% for task in tasks %}               
+        <li data-points="{{ task.value_points }}">
+            <input type="checkbox" class="task-checkbox" data-id="{{ task.id }}" {% if task.completed %}checked{%endif%}>  
+            {{ task.name }} ({{ task.value_points }})
+            <form method="post" action="/delete/{{ task.id }}" style="display: inline;">
+                <button type="submit">Delete Task</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+    <form method="post" action="/send-email">
+        <button type="button" onclick="sendEmailWithChart()">Send Email</button>
+    </form>
+
+    <div style="width: 500px;">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        function sendEmailWithChart() {
+            const canvas = document.getElementById("myChart");
+            const imageData = canvas.toDataURL("image/png");
+
+            fetch("/send-email", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ chart: imageData })
+            })
+            .then(res => res.json())
+            .then(() => alert("Email sent successfully"));
+        }
+    </script>
+
 {% endblock %}

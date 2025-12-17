@@ -1,58 +1,64 @@
-function updateTotal() {
+const ctx = document.getElementById("myChart");
+
+const myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ["Completed", "Remaining"],
+        datasets: [{
+            data: [0, 100],
+            backgroundColor: [
+                'rgb(54, 162, 235)',
+                'rgb(230, 230, 230)'
+            ]
+        }]
+    }
+});
+
+function updateChart() {
+    const productivity = Number(
+        document.getElementById("productivity").textContent
+    );
+
+    myChart.data.datasets[0].data = [
+        productivity,
+        100 - productivity
+    ];
+    myChart.update();
+}
+
+function updateTotals() {
     let total = 0;
-    document.querySelectorAll("#tasklist li").forEach(cb => {
-        total += Number(cb.dataset.points);
+    let completed = 0;
+
+    document.querySelectorAll("#tasklist li").forEach(li => {
+        const points = Number(li.dataset.points);
+        total += points;
+
+        const checkbox = li.querySelector(".task-checkbox");
+        if (checkbox.checked) {
+            completed += points;
+        }
     });
+
     document.getElementById("total").textContent = total;
-}
-
-function updateCompletedTotal(){
-    let completedTotal=Number(document.getElementById("completed-total").textContent);
-    document.querySelectorAll("#tasklist li input.task-checkbox:checked").forEach(cb => {
-        completedTotal+=Number(cb.dataset.points);
-    });
-    document.getElementById("completed-total").textContent=completedTotal;
-}
-
-function calcProductivity(){
-    let total=Number(document.getElementById("total").textContent);
-    let completed=Number(document.getElementById("completed-total").textContent);
-    if (total==0){
-        document.getElementById("productivity").textContent="0.0";
-        return;
-    }
-    let productivity=(completed/total)*100;
-    document.getElementById("productivity").textContent=productivity.toFixed(1);
-}
-
-function recallAll(){
-    updateTotal();
-    updateCompletedTotal();
-    calcProductivity();
-}
-
-function deleteTask(btn){
-    const li=btn.closest("li");
-    const points=Number(li.dataset.points);
-    let total=Number(document.getElementById("total").textContent);
-
-    total=total-points;
-    document.getElementById("total").textContent=total;
-
-    const checkbox=li.querySelector(".task-checkbox");
-    if (checkbox.checked){
-        let completed=Number(document.getElementById("completed-total").textContent);
-        completed=completed-points;
-        document.getElementById("completed-total").textContent=completed;
-    }
-
-    li.remove();
-    calcProductivity();
+    document.getElementById("completed-total").textContent = completed;
+    document.getElementById("productivity").textContent =
+        total === 0 ? "0" : ((completed / total) * 100).toFixed(1);
+    updateChart();
 }
 
 window.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".task-checkbox").forEach(cb => {
-        cb.addEventListener("change", recallAll);
+        cb.addEventListener("change", () => {
+            fetch("/update", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    id: cb.dataset.id,
+                    completed: cb.checked
+                })
+            }).then(() => updateTotals());
+        });
     });
-    recallAll();
+    updateTotals();
 });
