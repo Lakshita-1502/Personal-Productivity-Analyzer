@@ -28,7 +28,19 @@ db=mysql.connector.connect(
     database="personal_productivity_analyzer"
 )
 
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/')
+def home():
+    return render_template("dashboard.html")
+
+@app.route('/sign-up', methods=["POST","GET"])
+def signUp():
+    return render_template('signUp.html')
+
+@app.route('/login', methods=["POST","GET"])
+def login():
+    return render_template('login.html')
+
+@app.route('/add-task', methods=['POST', 'GET'])
 def taskForm():   
     cursor=db.cursor(dictionary=True)
     if request.method=="POST":
@@ -58,7 +70,7 @@ def delete_task(task_id):
     cursor.execute("delete from tasks where id=%s", (task_id,))
     db.commit()
     cursor.close()
-    return redirect('/')
+    return redirect('/add-task')
 
 @app.route('/send-email', methods=["POST"])
 def send_email():
