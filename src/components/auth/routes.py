@@ -1,4 +1,4 @@
-from flask import Blueprint, Flask, render_template, url_for, request, jsonify, redirect
+from flask import Blueprint, Flask, render_template, url_for, request, jsonify, redirect, session
 from extensions import db
 
 auth_bp = Blueprint("auth", __name__)
@@ -10,10 +10,12 @@ def login():
         userName=request.form.get("userName")
         password=request.form.get("password")
         if userName and password:
-            cursor.execute("select user_name, password from users where user_name = %s", 
-                           (userName,))
-            users=cursor.fetchall()
-            if password == users[0]["password"]:
+            cursor.execute("select id, user_name from users where user_name = %s and password = %s", 
+                           (userName,password))
+            user=cursor.fetchone()
+            if user:
+                session["user_id"]=user["id"]
+                session["user_name"]=user["user_name"]
                 return redirect('/')
         return redirect('/login')
     cursor.close()
@@ -33,4 +35,9 @@ def register():
         return redirect('/login')
     cursor.close()
     return render_template('register.html')
+
+@auth_bp.route("/logout")
+def logout():
+    session.clear()
+    return redirect('/')
 

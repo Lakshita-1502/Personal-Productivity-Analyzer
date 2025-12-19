@@ -1,0 +1,26 @@
+{% block content %}
+    <nav class="navbar bg-body-tertiary p-3 fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand logo-name" href="/">
+                LockedIn
+            </a>
+            {% if session.get("user_id") %}
+                <div class="dropdown">
+                    <a class="d-flex align-items-center text-decoration-none dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        <span class="ms-2">{{ session.get("user_name") }}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                    </ul>
+                </div>
+            {% else %}
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="/login" class="btn btn-outline-primary">Login</a>
+                    <a href="/register" class="btn btn-primary">Register</a>
+                </div>
+            {% endif %}
+        </div>
+    </nav>
+{% endblock %}

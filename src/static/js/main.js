@@ -1,32 +1,30 @@
 const ctx = document.getElementById("myChart");
 
 const myChart = new Chart(ctx, {
-    type: 'doughnut',
+    type: "doughnut",
     data: {
         labels: ["Completed", "Remaining"],
         datasets: [{
             data: [0, 100],
             backgroundColor: [
-                'rgb(54, 162, 235)',
-                'rgb(230, 230, 230)'
-            ]
+                "rgb(54, 162, 235)",
+                "rgb(230, 230, 230)"
+            ],
+            borderWidth: 0
         }]
+    },
+    options: {
+        cutout: "70%",
+        plugins: {
+            legend: {
+                position: "top"
+            }
+        }
     }
 });
 
-function updateChart() {
-    const productivity = Number(
-        document.getElementById("productivity").textContent
-    );
-
-    myChart.data.datasets[0].data = [
-        productivity,
-        100 - productivity
-    ];
-    myChart.update();
-}
-
-function updateTotals() {
+/* 🔹 Calculate totals directly from task list */
+function calculateProductivity() {
     let total = 0;
     let completed = 0;
 
@@ -40,13 +38,37 @@ function updateTotals() {
         }
     });
 
-    document.getElementById("total").textContent = total;
-    document.getElementById("completed-total").textContent = completed;
-    document.getElementById("productivity").textContent =
-        total === 0 ? "0" : ((completed / total) * 100).toFixed(1);
-    updateChart();
+    if (total === 0) return 0;
+    return ((completed / total) * 100).toFixed(1);
 }
 
+/* 🔹 Update chart only */
+function updateChart() {
+    const productivity = calculateProductivity();
+
+    myChart.data.datasets[0].data = [
+        productivity,
+        100 - productivity
+    ];
+
+    myChart.update();
+}
+
+/* 🔹 Email chart as image */
+function sendEmailWithChart() {
+    const canvas = document.getElementById("myChart");
+    const imageData = canvas.toDataURL("image/png");
+
+    fetch("/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chart: imageData })
+    })
+    .then(res => res.json())
+    .then(() => alert("Email sent successfully"));
+}
+
+/* 🔹 Checkbox listener */
 window.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".task-checkbox").forEach(cb => {
         cb.addEventListener("change", () => {
@@ -57,8 +79,10 @@ window.addEventListener("DOMContentLoaded", () => {
                     id: cb.dataset.id,
                     completed: cb.checked
                 })
-            }).then(() => updateTotals());
+            }).then(() => updateChart());
         });
     });
-    updateTotals();
+
+    // initial render
+    updateChart();
 });

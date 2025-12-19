@@ -1,10 +1,11 @@
 from flask import Flask
-from auth.routes import auth_bp
-from tasks.routes import tasks_bp
-from emailer.routes import email_bp
+from components.auth.routes import auth_bp
+from components.tasks.routes import tasks_bp
+from components.emailer.routes import email_bp
 
 def create_app():
     app=Flask(__name__)
+    app.secret_key="login-info"
     app.register_blueprint(auth_bp)
     app.register_blueprint(tasks_bp)
     app.register_blueprint(email_bp)

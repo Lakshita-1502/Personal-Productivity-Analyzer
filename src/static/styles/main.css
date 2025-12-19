@@ -2,3 +2,8 @@ body{
     margin: 0;
     font-family: sans-serif;
 }
+
+.logo-name{
+  font-style: bold;
+  font-size: 23px;
+}
