@@ -3,7 +3,6 @@ const ctx = document.getElementById("myChart");
 const myChart = new Chart(ctx, {
     type: "doughnut",
     data: {
-        labels: ["Completed", "Remaining"],
         datasets: [{
             data: [0, 100],
             backgroundColor: [
@@ -14,7 +13,7 @@ const myChart = new Chart(ctx, {
         }]
     },
     options: {
-        cutout: "70%",
+        cutout: "60%",
         plugins: {
             legend: {
                 position: "top"

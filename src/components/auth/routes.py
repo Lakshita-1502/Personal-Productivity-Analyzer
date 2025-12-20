@@ -19,7 +19,7 @@ def login():
                 return redirect('/')
         return redirect('/login')
     cursor.close()
-    return render_template('login.html')
+    return render_template('pages/login.html')
 
 @auth_bp.route("/register", methods=["GET", "POST"])
 def register():
@@ -34,7 +34,7 @@ def register():
             db.commit()
         return redirect('/login')
     cursor.close()
-    return render_template('register.html')
+    return render_template('pages/register.html')
 
 @auth_bp.route("/logout")
 def logout():

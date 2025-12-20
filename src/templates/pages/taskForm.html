@@ -1,49 +1,26 @@
-{% extends 'base.html' %}
+{% extends 'partials/base.html' %}
 
 {% block content %}
-    <div class="container mt-5 pt-5">
-        <div class="row pt-5">
-            <div class="col-lg-7">
-                <div class="card mb-4 text-center">
-                    <div class="card-body">
-                        <h5 class="card-title mb-3">Taskboard</h5>
-                        <form method="post">
-                            <input type="text" name="taskName" placeholder="Tasks" required>
-                            <input type="number" name="valuePoint" placeholder="Value Points" required min="0">
-                            <button type="submit">Add Task</button>
-                        </form>
-
-                        <ul style="list-style: none;" id="tasklist">  
-                            {% for task in tasks %}               
-                            <li data-points="{{ task.value_points }}">
-                                <input type="checkbox" class="task-checkbox" data-id="{{ task.id }}" {% if task.completed %}checked{%endif%}>  
-                                {{ task['name'] }} ({{ task['value_points'] }})
-                                <form method="post" action="/delete/{{ task.id }}" style="display: inline;">
-                                    <button type="submit">Delete Task</button>
-                                </form>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-5">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h5 class="card-title mb-3">Dashboard</h5>
-                        <div class="d-flex justify-content-center mb-3">
-                            <div style="height: 250px; width: 250px;">
-                                <canvas id="myChart"></canvas>
-                            </div>
-                        </div>
-                        <form method="post" action="/send-email">
-                            <button type="button" onclick="sendEmailWithChart()">Send Email</button>
-                        </form>
-                    </div>
-                </div>
+    <div class="d-flex justify-content-center mt-5">
+        <div class="card text-center" style="width: 40rem;">
+            <div class="card-body">
+                <form method="post">
+                    <input type="text" name="taskName" placeholder="Tasks" required>
+                    <input type="number" name="valuePoint" placeholder="Value Points" required min="0">
+                    <button type="submit">Add Task</button>
+                </form>
+                <ul style="list-style: none; padding-top: 20px;" id="tasklist">  
+                    {% for task in tasks %}               
+                        <li data-points="{{ task.value_points }}">
+                            <input type="checkbox" class="task-checkbox" data-id="{{ task.id }}" {% if task.completed %}checked{%endif%}>  
+                            {{ task['name'] }} ({{ task['value_points'] }})
+                            <form method="post" action="/delete/{{ task.id }}" style="display: inline;">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
-
 {% endblock %}

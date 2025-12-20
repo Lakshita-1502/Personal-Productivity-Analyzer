@@ -5,7 +5,7 @@ tasks_bp = Blueprint("tasks", __name__)
 
 @tasks_bp.route("/")
 def home():
-    return render_template("dashboard.html")
+    return render_template("pages/dashboard.html", page="dashboard")
 
 @tasks_bp.route("/add-task", methods=["GET", "POST"])
 def taskForm():   
@@ -20,7 +20,7 @@ def taskForm():
     cursor.execute("select * from tasks")
     tasks=cursor.fetchall()
     cursor.close()
-    return render_template('taskForm.html', tasks=tasks)
+    return render_template('pages/taskForm.html', tasks=tasks, page="task")
 
 @tasks_bp.route("/update", methods=["POST"])
 def update():
