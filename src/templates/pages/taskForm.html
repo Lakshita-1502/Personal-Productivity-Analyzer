@@ -4,7 +4,16 @@
     <div class="d-flex justify-content-center mt-5">
         <div class="card text-center" style="width: 40rem;">
             <div class="card-body">
-                <form method="post">
+                <form method="post" class="d-flex align-items-center gap-2">
+                    <div class="dropdown">
+                        <a class="d-flex align-items-center text-decoration-none dropdown-toggle fw-semibold" href="#" data-bs-toggle="dropdown">
+                            <img src="{{ url_for('static', filename='assets/red.png') }}" width="20" height="20">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><img src="{{ url_for('static', filename='assets/yellow.png') }}" width="20" height="20"></li>
+                            <li><img src="{{ url_for('static', filename='assets/green.png') }}" width="20" height="20"></li>
+                        </ul>
+                    </div>
                     <input type="text" name="taskName" placeholder="Tasks" required>
                     <input type="number" name="valuePoint" placeholder="Value Points" required min="0">
                     <button type="submit">Add Task</button>
