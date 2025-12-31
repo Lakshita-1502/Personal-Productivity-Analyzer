@@ -12,7 +12,7 @@ def taskForm():
     cursor=db.cursor(dictionary=True)
     if request.method=="POST":
         taskDesc=request.form.get("taskName")
-        taskValue=request.form.get("valuePoint")
+        taskValue=request.form.get("valuePoint", type=int)
         if taskDesc and taskValue:
             cursor.execute("insert into tasks (name, value_points) values (%s, %s)", 
                            (taskDesc, int(taskValue)))

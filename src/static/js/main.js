@@ -22,7 +22,6 @@ const myChart = new Chart(ctx, {
     }
 });
 
-/* 🔹 Calculate totals directly from task list */
 function calculateProductivity() {
     let total = 0;
     let completed = 0;
@@ -41,7 +40,6 @@ function calculateProductivity() {
     return ((completed / total) * 100).toFixed(1);
 }
 
-/* 🔹 Update chart only */
 function updateChart() {
     const productivity = calculateProductivity();
 
@@ -53,7 +51,6 @@ function updateChart() {
     myChart.update();
 }
 
-/* 🔹 Email chart as image */
 function sendEmailWithChart() {
     const canvas = document.getElementById("myChart");
     const imageData = canvas.toDataURL("image/png");
@@ -67,8 +64,17 @@ function sendEmailWithChart() {
     .then(() => alert("Email sent successfully"));
 }
 
-/* 🔹 Checkbox listener */
 window.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".dropdown-item").forEach(item=>{
+        item.addEventListener("click", function(e){
+            e.preventDefault();
+            const value=Number(this.dataset.value);
+            const img=this.dataset.img;
+            document.getElementById('selectedImg').src = img;
+            document.getElementById('selectedValue').value = value;
+        });
+    });
+
     document.querySelectorAll(".task-checkbox").forEach(cb => {
         cb.addEventListener("change", () => {
             fetch("/update", {
@@ -81,7 +87,5 @@ window.addEventListener("DOMContentLoaded", () => {
             }).then(() => updateChart());
         });
     });
-
-    // initial render
     updateChart();
 });
