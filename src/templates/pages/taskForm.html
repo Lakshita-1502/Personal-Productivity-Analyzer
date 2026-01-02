@@ -2,40 +2,49 @@
 
 {% block content %}
     <div class="d-flex justify-content-center mt-5">
-        <div class="card text-center" style="width: 40rem;">
+        <div class="card text-center" style="width: 35rem;">
             <div class="card-body">
-                <form method="post" class="d-flex align-items-center gap-2">
-                    <div class="dropdown">
-                        <a class="d-flex align-items-center text-decoration-none dropdown-toggle fw-semibold" href="#" data-bs-toggle="dropdown" id="dropdownMenuButton" aria-expanded="false">
-                            <img src="{{ url_for('static', filename='assets/red.png') }}" width="20" height="20" id="selectedImg">
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                            <li>
-                                <a class="dropdown-item" href="#" data-img="{{ url_for('static', filename='assets/red.png') }}" data-value="3">
-                                    <img src="{{ url_for('static', filename='assets/red.png') }}" width="20" height="20">
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#" data-img="{{ url_for('static', filename='assets/yellow.png') }}" data-value="2">
-                                    <img src="{{ url_for('static', filename='assets/yellow.png') }}" width="20" height="20">
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#"data-img="{{ url_for('static', filename='assets/green.png') }}" data-value="1">
-                                    <img src="{{ url_for('static', filename='assets/green.png') }}" width="20" height="20">
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <input type="hidden" id="selectedValue" name="valuePoint" value="3">
-                    <input type="text" name="taskName" placeholder="Tasks" required>
-                    <button type="submit">Add Task</button>
-                </form>
-                <ul style="list-style: none; padding-top: 20px;" id="tasklist">  
+                <div class="d-flex justify-content-center">
+                    <form method="post" class="d-flex align-items-center gap-2">
+                        <div class="dropdown">
+                            <a class="d-flex align-items-center text-decoration-none dropdown-toggle fw-semibold" href="#" data-bs-toggle="dropdown" id="dropdownMenuButton" aria-expanded="false">
+                                <img src="{{ url_for('static', filename='assets/red.png') }}" width="20" height="20" id="selectedImg">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end compact-dropdown aria-labelledby="dropdownMenuButton">
+                                <li>
+                                    <a class="dropdown-item" href="#" data-img="{{ url_for('static', filename='assets/red.png') }}" data-value="3">
+                                        <img src="{{ url_for('static', filename='assets/red.png') }}" width="20" height="20">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#" data-img="{{ url_for('static', filename='assets/yellow.png') }}" data-value="2">
+                                        <img src="{{ url_for('static', filename='assets/yellow.png') }}" width="20" height="20">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#"data-img="{{ url_for('static', filename='assets/green.png') }}" data-value="1">
+                                        <img src="{{ url_for('static', filename='assets/green.png') }}" width="20" height="20">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <input type="hidden" id="selectedValue" name="valuePoint" value="3">
+                        <input type="text" name="taskName" placeholder="Tasks" required>
+                        <button type="submit">Add Task</button>
+                    </form>
+                </div>
+                <ul style="list-style: none; padding-top: 20px;" id="tasklist" class="task-list text-start ps-0 w-100">  
                     {% for task in tasks %}               
                         <li data-points="{{ task.value_points }}">
                             <input type="checkbox" class="task-checkbox" data-id="{{ task.id }}" {% if task.completed %}checked{%endif%}>  
-                            {{ task['name'] }} ({{ task['value_points'] }})
+                            {% if task['value_points']|int == 3 %}
+                                <img src="{{ url_for('static', filename='assets/red.png') }}" width="20" height="20">
+                            {% elif task['value_points']|int == 2 %}
+                                <img src="{{ url_for('static', filename='assets/yellow.png') }}" width="20" height="20">
+                            {% else %}
+                                <img src="{{ url_for('static', filename='assets/green.png') }}" width="20" height="20">
+                            {% endif %}
+                            {{ task['name'] }} 
                             <form method="post" action="/delete/{{ task.id }}" style="display: inline;">
                                 <button type="submit">Delete</button>
                             </form>

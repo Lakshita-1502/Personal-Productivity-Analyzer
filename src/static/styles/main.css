@@ -7,3 +7,30 @@ body{
   font-style: bold;
   font-size: 23px;
 }
+
+.compact-dropdown {
+  min-width: auto;       
+  width: auto;
+  padding: 0.25rem;
+}
+
+.compact-dropdown .dropdown-item {
+  padding: 0.25rem;       
+  display: flex;
+  justify-content: center;
+}
+
+.compact-dropdown img {
+  display: block;
+}
+
+.task-list {
+  text-align: left;   
+  margin-left: 0;
+}
+
+.task-list li {
+  display: flex;      
+  align-items: center;
+  gap: 8px;
+}

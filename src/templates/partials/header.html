@@ -1,38 +1,112 @@
-{% block content %}
-    <nav class="navbar bg-body-tertiary p-3 fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand logo-name" href="/">
-                LockedIn
-            </a>
-            <div class="d-flex align-items-center gap-3 ms-auto">
-                {% if session.get("user_id") %}
-                    {% if page== 'task' %}
-                        <form method="post" action="/send-email" class="mb-0">
-                                <button type="button" onclick="sendEmailWithChart()" class="btn btn-outline-primary btn-sm">
-                                    Send Email
-                                </button>
-                        </form>
-                        <div class="d-flex align-items-center justify-content-center" style="height: 45px; width: 50px;">
-                            <canvas id="myChart"></canvas>
-                        </div>
-                    {% endif %}
-                        <div class="dropdown">
-                            <a class="d-flex align-items-center text-decoration-none dropdown-toggle fw-semibold" href="#" data-bs-toggle="dropdown">
-                                <span class="ms-2">{{ session.get("user_name") }}</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                                <li><hr class="dropdown-divider"></li> 
-                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                            </ul>
-                        </div>  
-                {% else %}
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="/login" class="btn btn-outline-primary">Login</a>
-                        <a href="/register" class="btn btn-primary">Register</a>
+<nav class="navbar bg-body-tertiary p-3 fixed-top" style="z-index: 2000;">
+    <div class="container-fluid">
+        <a class="navbar-brand logo-name" href="/">
+            LockedIn
+        </a>
+
+        <div class="d-flex align-items-center gap-3 ms-auto">
+            {% if session.get("user_id") %}
+
+                {% if page == 'task' %}
+                    <button
+                        type="button"
+                        onclick="sendEmailWithChart()"
+                        class="btn btn-outline-primary btn-sm">
+                        Send Email
+                    </button>
+
+                    <div class="d-flex align-items-center justify-content-center"
+                         style="height: 45px; width: 50px;">
+                        <canvas id="myChart"></canvas>
                     </div>
                 {% endif %}
-            </div>
+
+                <div class="dropdown">
+                    <button
+                        class="btn btn-link dropdown-toggle d-flex align-items-center fw-semibold"
+                        type="button"
+                        id="userDropdown"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        style="text-decoration: none;">
+                        <span class="ms-2">{{ session.get("user_name") }}</span>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li>
+                            <a class="dropdown-item" href="/profile">
+                                Profile
+                            </a>
+                        </li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+                            <form action="/logout" method="POST" id="logoutForm">
+                                <button type="submit" class="dropdown-item" id="logoutButton">
+                                    Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+
+            {% else %}
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="/login" class="btn btn-outline-primary">
+                        Login
+                    </a>
+                    <a href="/register" class="btn btn-primary">
+                        Register
+                    </a>
+                </div>
+            {% endif %}
         </div>
-    </nav>
-{% endblock %}
+    </div>
+</nav>
+
+<!-- Inline script for immediate logout handling -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔍 Checking for logout elements...');
+    
+    // Use event delegation on the document
+    document.addEventListener('submit', function(e) {
+        if (e.target && e.target.id === 'logoutForm') {
+            console.log('🔴 LOGOUT FORM SUBMITTED VIA EVENT DELEGATION');
+            // Let it submit naturally
+        }
+    });
+    
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.id === 'logoutButton') {
+            console.log('🔴 LOGOUT BUTTON CLICKED VIA EVENT DELEGATION');
+        }
+    });
+    
+    // Direct check
+    setTimeout(function() {
+        const form = document.getElementById('logoutForm');
+        const btn = document.getElementById('logoutButton');
+        console.log('Form exists:', !!form);
+        console.log('Button exists:', !!btn);
+        if (form) {
+            console.log('Form action:', form.action);
+            console.log('Form method:', form.method);
+        }
+    }, 500);
+});
+</script>
+
+<!-- Debug Panel (Remove in production) -->
+<div style="position: fixed; bottom: 10px; right: 10px; background: rgba(0,0,0,0.85); color: #00ff00; padding: 12px; font-family: monospace; font-size: 11px; z-index: 9999; border-radius: 5px; border: 2px solid #00ff00;">
+    <strong>🔍 DEBUG INFO:</strong><br>
+    <span style="color: #ffff00;">User ID:</span> {{ session.get("user_id", "❌ Not logged in") }}<br>
+    <span style="color: #ffff00;">Username:</span> {{ session.get("user_name", "N/A") }}<br>
+    <span style="color: #ffff00;">Status:</span> 
+    {% if session.get("user_id") %}
+        <span style="color: #00ff00;">✅ LOGGED IN</span>
+    {% else %}
+        <span style="color: #ff0000;">❌ LOGGED OUT</span>
+    {% endif %}
+</div>
