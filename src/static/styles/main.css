@@ -1,11 +1,238 @@
 body{
-    margin: 0;
-    font-family: sans-serif;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #FAFAFA;
 }
 
 .logo-name{
+  font-family: 'Poppins', sans-serif;
   font-style: bold;
-  font-size: 23px;
+  font-size: 24px;
+  color: black;
+  font-weight: 700;
+}
+
+.logo-name:hover{
+  text-decoration: none;
+}
+
+.registerButton{
+  background-color: black;
+  color: white
+}
+
+.registerButton:hover{
+  background-color: #434343;
+  color: white;
+}
+
+.loginButton:hover{
+  background-color: #e3dbdb;
+}
+
+.hero-section{
+  padding-top: 40px;
+}
+
+.hero-section h1{
+  font-weight: bold;
+  font-size: 57px;
+  color: #313131;
+}
+
+.hero-section p{
+  font-size: 16px;
+  color: #666666;
+  line-height: 1.7;
+}
+
+.hero-section a{
+  background-color: black;
+  color: white;
+}
+
+.hero-section a:hover{
+  background-color: #434343;
+  color: white;
+}
+
+.hero-section a:clicked{
+  background-color: black;
+  color: white;
+}
+
+.hero-image{
+  background-color: #f77463;
+  border-radius: 20px;
+  height: 470px;
+}
+
+.workflow{
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 50px;
+  margin-top: 80px;
+  padding: 10px;
+}
+
+.workflow-header{
+  text-align: center;
+  padding: 20px;
+}
+
+.workflow-header h2{
+  font-size: 37px;
+  font-weight: 700;
+  color: #313131;
+}
+
+.workflow-header p{
+  font-size: 16px;
+  color: #666666;
+}
+
+.workflow-features{
+  max-width: 800px;
+  margin: 3rem auto 0;
+}
+
+.feature{
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.feature:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 29px;
+  top: 60px;
+  width: 2px;
+  height: calc(100% + 1rem);
+  background: #62aef0;
+}
+
+.feature-number {
+  width: 60px;
+  height: 60px;
+  background: #62aef0;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.feature-content {
+  flex: 1;
+  padding-top: 0.5rem;
+}
+
+.feature-content h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+  color: #000;
+}
+
+.feature-content p {
+  color: #666;
+  line-height: 1.7;
+}
+
+.functions{
+  text-align: center;
+  margin-top: 80px;
+  margin-bottom: 50px;
+}
+
+.functions-header h2{
+  font-size: 37px;
+  font-weight: 700;
+  color: #313131;
+}
+
+.functions-card{
+  display: flex;
+  margin: 30px;
+  height: 350px;
+}
+
+.function{
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px;
+  flex: 1;
+}
+
+.function span{
+  font-size: 40px;
+}
+
+.function h3{
+  padding-top: 23px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #313131;
+}
+
+.function p{
+  font-size: 16px;
+  color: #666666;
+  line-height: 1.7;
+}
+
+.login-section{
+  background-color: #0F172A;
+  color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 50px;
+  margin-top: 60px;
+  padding: 20px;
+  height: 230px;
+  text-align: center;
+}
+
+.login-section h2{
+  font-size: 37px;
+  font-weight: 700;
+  color: white;
+  padding-top: 30px;
+}
+
+.login-section p{
+  font-size: 16px;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.login-section a{
+  background-color: white;
+  color: black;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.login-section a:hover{
+  background-color: #e3dbdb;
+  color: black;
+}
+
+.login-section a:clicked{
+  background-color: white;
+  color: black;
 }
 
 .compact-dropdown {

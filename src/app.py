@@ -16,17 +16,6 @@ def create_app():
     app.config['SESSION_COOKIE_HTTPONLY'] = True
     app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
     
-    # Debug middleware
-    @app.before_request
-    def log_session():
-        from flask import request
-        if '/static/' not in request.path:
-            print(f"\n{'='*60}")
-            print(f"REQUEST: {request.method} {request.path}")
-            print(f"SESSION: {dict(session)}")
-            print(f"LOGGED IN: {'user_id' in session}")
-            print(f"{'='*60}\n")
-    
     # Register blueprints WITHOUT url_prefix
     app.register_blueprint(auth_bp)
     app.register_blueprint(tasks_bp)

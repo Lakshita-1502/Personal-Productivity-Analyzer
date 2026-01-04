@@ -1,58 +1,94 @@
 {% extends 'partials/base.html' %}
 
 {% block content %}
-    <div class="position-relative overflow-hidden text-center"> 
-        <div class="container col-xxl-4"> 
-            <div class="row flex-lg-row-reverse align-items-center g-5"> 
-                <div class="col-10 col-sm-8 col-lg-6"> 
-                    <img src="{{ url_for('static', filename='assets/Dashboard.png') }}" class="d-block mx-lg-auto img-fluid" alt="Productivity" width="700" height="500" loading="lazy"> 
-                </div> 
-                <div class="col-lg-6"> 
-                    <h1 class="display-5 text-body-emphasis lh-1 mb-3">
-                        Let's maximise your productivity with <span style="font-weight: bold;">"LockedIn"</span>
-                    </h1> 
-                    <div class="d-grid gap-2 d-md-flex justify-content-sm-center"> 
-                        {% if session.get("user_id") %}
-                            <a href="/add-task" class="btn btn-primary">Getting Started</a>
-                        {% else %}
-                            <a href="/login" class="btn btn-primary">Getting Started</a>
-                        {% endif %}
+    <div class="hero-section">
+        <div class="position-relative overflow-hidden text-center"> 
+            <div class="container col-xxl-4"> 
+                <div class="row flex-lg-row-reverse align-items-center g-5"> 
+                    <div class="col-10 col-sm-8 col-lg-6 hero-image"> 
+                        <img src="{{ url_for('static', filename='assets/Dashboard.png') }}" class="d-block mx-lg-auto img-fluid" alt="Productivity" width="700" height="500" loading="lazy"> 
+                    </div> 
+                    <div class="col-lg-6"> 
+                        <h1>
+                            Stay LockedIn
+                        </h1> 
+                        <p>
+                            Turn your daily tasks into measurable progress.
+                            Assign priorities, track productivity, and receive automated reports.
+                        </p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-sm-center"> 
+                            {% if session.get("user_id") %}
+                                <a href="/add-task" class="btn">Getting Started</a>
+                            {% else %}
+                                <a href="/login" class="btn">Getting Started</a>
+                            {% endif %}
+                        </div> 
                     </div> 
                 </div> 
-            </div> 
+            </div>
         </div>
     </div>
 
-    <div class="container px-4 py-5" id="custom-cards"> 
-        <h2 class="pb-2 border-bottom">What we do?</h2> 
-        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5"> 
-            <div class="col"> 
-                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-1.jpg');"> 
-                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1"> 
-                        <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">
-                            Real-Time Productivity Tracking
-                        </h3> 
-                    </div> 
-                </div> 
-            </div> 
-            <div class="col"> 
-                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-2.jpg');"> 
-                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1"> 
-                        <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">
-                            Priority-Based Task Scoring
-                        </h3>
-                    </div> 
-                </div> 
-            </div> 
-            <div class="col"> 
-                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-3.jpg');"> 
-                    <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1"> 
-                        <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">
-                            Automated Daily PDF Reports
-                        </h3> 
-                    </div> 
-                </div> 
-            </div> 
-        </div> 
+    <div class="workflow">
+        <div class="workflow-header">
+            <h2>How it works?</h2>
+            <p>Follow these steps to maximize your productivity</p>
+        </div>
+        <div class="workflow-features">
+            <div class="feature">
+                <div class="feature-number">1</div>
+                <div class="feature-content">
+                    <h3>Set Up Your Tasks</h3>
+                    <p>Start by adding your daily tasks to LockedIn. Assign each task a priority level using our color-coded system.</p>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-number">2</div>
+                <div class="feature-content">
+                    <h3>Work and Track</h3>
+                    <p>As you complete tasks throughout the day, simply check them off in the app, your productivity score updates automatically.</p>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-number">3</div>
+                <div class="feature-content">
+                    <h3>Review and Improve</h3>
+                    <p>At the end of each day, receive a comprehensive PDF report via email.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="functions" id="custom-cards">
+        <div class="functions-header">
+            <h2>What we do?</h2>
+        </div>
+        <div class="functions-card">
+            <div class="function">
+                <span>📊</span>
+                <h3>Real-Time Productivity Tracking</h3>
+                <p>Monitor your productivity throughout the day with our dynamic tracking system. Get instant feedback on your performance as you complete tasks.</p>
+            </div>
+            <div class="function">
+                <span>🎯</span>
+                <h3>Priority-Based Task Scoring</h3>
+                <p>Our unique scoring algorithm prioritizes your tasks based on urgency and importance, helping you focus on what matters most.</p>
+            </div>
+            <div class="function">
+                <span>📄</span>
+                <h3>Automated Daily PDF Reports</h3>
+                <p>Receive detailed daily reports in PDF format, summarizing your productivity metrics and providing insights to help you improve.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-section">
+        <h2>Start tracking your productivity today</h2>
+        <p>It takes less than a minute to begin.</p>
+        {% if session.get("user_id") %}
+            <a href="/add-task" class="btn">Create Account</a>
+        {% else %}
+            <a href="/login" class="btn">Create Account</a>
+        {% endif %}
     </div>
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Blueprint, Flask, render_template, url_for, request, jsonify, redirect
+from flask import Blueprint, request, jsonify
 from extensions import db
 from config import emailId, emailPassword
 import smtplib

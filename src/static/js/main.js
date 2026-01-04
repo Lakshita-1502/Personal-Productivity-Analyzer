@@ -80,43 +80,8 @@ function sendEmailWithChart() {
 
 window.sendEmailWithChart = sendEmailWithChart;
 
-// Initialize logout handler
-function initLogoutHandler() {
-    console.log("🔍 Looking for logout form...");
-    
-    // Try multiple ways to find the logout form
-    const logoutForm = document.getElementById('logoutForm') || 
-                       document.querySelector('form[action="/logout"]') ||
-                       document.querySelector('form[action*="logout"]');
-    
-    if (logoutForm) {
-        console.log("✅ Logout form found:", logoutForm);
-        console.log("   Action:", logoutForm.action);
-        console.log("   Method:", logoutForm.method);
-        
-        logoutForm.addEventListener('submit', function(e) {
-            console.log("🔴 LOGOUT FORM SUBMITTED!");
-            console.log("   Submitting to:", this.action);
-            // Let form submit naturally - don't prevent default
-        });
-        
-        const logoutBtn = logoutForm.querySelector('button[type="submit"]');
-        if (logoutBtn) {
-            console.log("✅ Logout button found");
-            logoutBtn.addEventListener('click', function(e) {
-                console.log("🔴 LOGOUT BUTTON CLICKED!");
-            });
-        }
-    } else {
-        console.log("❌ Logout form NOT found");
-        console.log("   This is normal if user is not logged in");
-    }
-}
-
 // DOM Ready handler
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("🟢 DOM Loaded - Initializing...");
-    
     // Task dropdown handlers
     document.querySelectorAll(".dropdown-item[data-value]").forEach(item => {
         item.addEventListener("click", function(e) {
@@ -158,17 +123,5 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initial chart update
     if (typeof updateChart === 'function') {
         updateChart();
-    }
-    
-    // Initialize logout handler
-    initLogoutHandler();
-    
-    // Also try to attach after dropdown is shown (Bootstrap event)
-    const dropdownElement = document.querySelector('.dropdown');
-    if (dropdownElement) {
-        dropdownElement.addEventListener('shown.bs.dropdown', function () {
-            console.log("🔽 Dropdown opened, re-checking logout form...");
-            initLogoutHandler();
-        });
     }
 });

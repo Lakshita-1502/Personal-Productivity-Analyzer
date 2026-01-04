@@ -1,4 +1,4 @@
-from flask import Blueprint, Flask, flash, render_template, url_for, request, jsonify, redirect, session
+from flask import Blueprint, flash, render_template, url_for, request, redirect, session
 from extensions import db
 from functools import wraps
 
@@ -23,17 +23,17 @@ def login():
         try:
             userName=request.form.get("userName")
             password=request.form.get("password")
+
             if userName and password:
                 cursor.execute("select id, user_name from users where user_name = %s and password = %s", 
                             (userName,password))
                 user=cursor.fetchone()
+
                 if user:
                     session.clear()
                     session["user_id"]=user["id"]
                     session["user_name"]=user["user_name"]
                     session.permanent=True
-                    print(f"Login successful for user: {user['user_name']}")
-                    print(f"Session after login: {dict(session)}")
                     flash('Login successful!', 'success')
                     return redirect('/')
                 else:
@@ -85,36 +85,14 @@ def register():
 
 @auth_bp.route("/logout", methods=["POST"])
 def logout():
-    print("\n" + "="*50)
-    print("LOGOUT CALLED")
-    print("="*50)
-    print(f"Session BEFORE clear: {dict(session)}")
-    print(f"User ID BEFORE: {session.get('user_id')}")
-    print(f"User Name BEFORE: {session.get('user_name')}")
-    
-    # Method 1: Pop individual items
     user_id = session.pop("user_id", None)
     user_name = session.pop("user_name", None)
     
-    print(f"\nPopped user_id: {user_id}")
-    print(f"Popped user_name: {user_name}")
-    
-    # Method 2: Also clear everything
-    session.clear()
-    
-    # Force session modification
+    session.clear() 
     session.modified = True
-    
-    print(f"\nSession AFTER clear: {dict(session)}")
-    print(f"User ID AFTER: {session.get('user_id')}")
-    print(f"Is session empty? {len(session) == 0}")
-    print("="*50 + "\n")
-    
+
     response = redirect('/')
-    
-    # Clear session cookie
     response.set_cookie('session', '', expires=0)
-    
     return response
 
 @auth_bp.route("/profile")
