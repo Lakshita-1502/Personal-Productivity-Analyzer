@@ -4,21 +4,21 @@
             LockedIn
         </a>
 
-        <div class="d-flex align-items-center gap-3 ms-auto">
+        <div class="d-flex align-items-center gap-1 ms-auto productivity-header">
             {% if session.get("user_id") %}
                 {% if page == 'task' %}
-                    <button type="button" onclick="sendEmailWithChart()" class="btn btn-outline-primary btn-sm">
+                    <button type="button" onclick="sendEmailWithChart()" class="btn email-button">
                         Send Email
                     </button>
 
-                    <div class="d-flex align-items-center justify-content-center" style="height: 45px; width: 50px;">
+                    <div class="d-flex align-items-center justify-content-center graph" style="height: 50px; width: 50px;">
                         <canvas id="myChart"></canvas>
                     </div>
                 {% endif %}
 
                 <div class="dropdown">
-                    <button class="btn btn-link dropdown-toggle d-flex align-items-center fw-semibold" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;">
-                        <span class="ms-2">{{ session.get("user_name") }}</span>
+                    <button class="btn dropdown-toggle d-flex align-items-center fw-semibold user-name" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;">
+                        <span>{{ session.get("user_name") }}</span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                         <li>

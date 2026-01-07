@@ -1,0 +1,86 @@
+.task-form {
+  margin-left: 20px;
+}
+
+.priority-dot{
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-block
+}
+
+.priority-dot.high{
+  background-color: #EF4444;
+}
+
+.priority-dot.medium{
+  background-color: #F59E0B;
+}
+
+.priority-dot.low{
+  background-color: #3B82F6;
+}
+
+/* Style Bootstrap’s arrow */
+.priority-toggle::after {
+  margin-left: 3px;
+  border-top-color: #64748b;   /* arrow color */
+  transition: transform 0.2s ease, border-top-color 0.2s ease;
+}
+
+/* Rotate when open */
+.priority-toggle[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+  border-top-color: #0f172a;
+}
+
+/* Align dot + arrow */
+.priority-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+.compact-dropdown {
+  min-width: auto;       
+  width: auto;
+  padding: 0.25rem;
+}
+
+.compact-dropdown .dropdown-item {
+  padding: 0.25rem;       
+  display: flex;
+  justify-content: center;
+}
+
+.compact-dropdown img {
+  display: block;
+}
+
+.task-name{
+    border: none;
+    border-bottom: #64748b 2px solid;
+    outline: none;
+    font-size: 16px;
+    padding: 4px 8px;
+    width: 600px;
+}
+
+.add-task-btn {
+  border: none;
+  background: transparent;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.add-task-btn:hover {
+  opacity: 0.85;
+}
+
+.add-task-icon {
+  width: 16px;     /* adjust size */
+  height: 16px;
+}

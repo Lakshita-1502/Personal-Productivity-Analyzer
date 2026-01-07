@@ -1,0 +1,68 @@
+.logo-name{
+  font-family: 'Poppins', sans-serif;
+  font-style: bold;
+  font-size: 24px;
+  color: black;
+  font-weight: 700;
+}
+
+.logo-name:hover{
+  text-decoration: none;
+}
+
+.registerButton{
+  background-color: black;
+  color: white
+}
+
+.registerButton:hover{
+  background-color: #434343;
+  color: white;
+}
+
+.loginButton:hover{
+  background-color: #e3dbdb;
+}
+
+.email-button{
+  background: transparent;
+  color: #0F172A;
+  border: 1.5px solid #0F172A;
+  font-weight: 500;
+  border-radius: 10px;
+}
+
+.email-button:hover{
+  background-color: #434343;
+  color: white;
+}
+
+.email-button:clicked{
+  background-color: black;
+  color: white;
+}
+
+.graph{
+  margin-bottom: 10px;
+  margin-left: 12px;
+}
+
+.user-name{
+  margin-left: 0px;
+  color: black;
+  border: none;
+}
+
+.user-name:hover{
+  text-decoration: none;
+  color: black;
+}
+
+.user-name:focus,
+.user-name:focus-visible,
+.user-name:active {
+  color: #000;
+  background-color: transparent;
+  box-shadow: none;        /* removes blue glow */
+  outline: none;           /* removes focus ring */
+}

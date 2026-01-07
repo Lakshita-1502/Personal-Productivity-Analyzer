@@ -8,8 +8,8 @@ if (ctx) {
             datasets: [{
                 data: [0, 100],
                 backgroundColor: [
-                    "rgb(54, 162, 235)",
-                    "rgb(230, 230, 230)"
+                    "#434343",
+                    "#E6E6E6"
                 ],
                 borderWidth: 0
             }]
@@ -84,18 +84,17 @@ window.sendEmailWithChart = sendEmailWithChart;
 document.addEventListener("DOMContentLoaded", () => {
     // Task dropdown handlers
     document.querySelectorAll(".dropdown-item[data-value]").forEach(item => {
-        item.addEventListener("click", function(e) {
+        item.addEventListener("click", function (e) {
             e.preventDefault();
-            const value = Number(this.dataset.value);
-            const img = this.dataset.img;
-            
-            const selectedImg = document.getElementById('selectedImg');
-            const selectedValue = document.getElementById('selectedValue');
-            
-            if (selectedImg && selectedValue) {
-                selectedImg.src = img;
-                selectedValue.value = value;
-            }
+
+            const value = this.dataset.value;
+            const priorityClass = this.dataset.class;
+
+            const selectedDot = document.getElementById("selectedImage");
+            const selectedValue = document.getElementById("selectedValue");
+
+            selectedDot.className = `priority-dot ${priorityClass}`;
+            selectedValue.value = value;
         });
     });
 

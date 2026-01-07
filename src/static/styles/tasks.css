@@ -1,0 +1,148 @@
+/* tasks.css - FIXED VERSION */
+
+.task-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: none;
+  width: 750px;
+}
+
+.delete-task-btn {
+  border: none;
+  background: transparent;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s ease;
+  margin-left: auto;
+}
+
+.delete-task-btn:hover {
+  opacity: 0.6;
+}
+
+.delete-task-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.task-list {
+  text-align: left;   
+  margin-left: 0;
+  list-style: none;
+  padding-top: 30px;
+}
+
+.task-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  position: relative;
+}
+
+/* Underline after each task */
+.task-list li::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 0;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.task-list form{
+  margin-left: auto;
+}
+
+/* FIXED: Task content container */
+.task-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  gap: 12px;
+}
+
+.task-text {
+  flex: 1;
+  font-size: 15px;
+  color: #1f2937;
+  line-height: 1.5;
+  padding-left: 10px;
+}
+
+/* Checkbox styles */
+.circle-checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.circle-checkbox input {
+  display: none;
+}
+
+/* Outer circle */
+.circle-checkbox .checkmark {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+/* Priority colors */
+.checkmark.high {
+  border-color: #EF4444;
+  color: #EF4444;
+}
+
+.checkmark.medium {
+  border-color: #F59E0B;
+  color: #F59E0B;
+}
+
+.checkmark.low {
+  border-color: #3B82F6;
+  color: #3B82F6;
+}
+
+/* Filled background when checked */
+.circle-checkbox input:checked + .checkmark {
+  background-color: currentColor;
+  border-color: currentColor;
+}
+
+/* Show tick when checked */
+.circle-checkbox input:checked + .checkmark::after {
+  content: "";
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  display: inline-block;
+  margin-top: -2px;
+}
+
+/* Hover feedback */
+.circle-checkbox:hover .checkmark {
+  transform: scale(1.15);
+}
+
+/* Strike-through text when checked */
+.circle-checkbox input:checked ~ .task-content .task-text {
+  text-decoration: line-through;
+  opacity: 0.5;
+  color: #9ca3af;
+}
+

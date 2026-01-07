@@ -2,51 +2,62 @@
 
 {% block content %}
     <div class="d-flex justify-content-center mt-5">
-        <div class="card text-center" style="width: 35rem;">
+        <div class="card text-center task-card">
             <div class="card-body">
-                <div class="d-flex justify-content-center">
+                <div class="d-flex task-form">
                     <form method="post" class="d-flex align-items-center gap-2">
                         <div class="dropdown">
-                            <a class="d-flex align-items-center text-decoration-none dropdown-toggle fw-semibold" href="#" data-bs-toggle="dropdown" id="dropdownMenuButton" aria-expanded="false">
-                                <img src="{{ url_for('static', filename='assets/red.png') }}" width="20" height="20" id="selectedImg">
+                            <a class="d-flex align-items-center text-decoration-none dropdown-toggle fw-semibold priority-toggle" href="#" data-bs-toggle="dropdown" id="dropdownMenuButton" aria-expanded="false">
+                                <span id="selectedImage" class="priority-dot high"></span>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end compact-dropdown aria-labelledby="dropdownMenuButton">
+                            <ul class="dropdown-menu dropdown-menu-end compact-dropdown" aria-labelledby="dropdownMenuButton">
                                 <li>
-                                    <a class="dropdown-item" href="#" data-img="{{ url_for('static', filename='assets/red.png') }}" data-value="3">
-                                        <img src="{{ url_for('static', filename='assets/red.png') }}" width="20" height="20">
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href="#" data-value="3" data-class="high">
+                                        <span class="priority-dot high"></span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#" data-img="{{ url_for('static', filename='assets/yellow.png') }}" data-value="2">
-                                        <img src="{{ url_for('static', filename='assets/yellow.png') }}" width="20" height="20">
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href="#" data-value="2" data-class="medium">
+                                        <span class="priority-dot medium"></span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#" data-img="{{ url_for('static', filename='assets/green.png') }}" data-value="1">
-                                        <img src="{{ url_for('static', filename='assets/green.png') }}" width="20" height="20">
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href="#" data-value="1" data-class="low">
+                                        <span class="priority-dot low"></span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                         <input type="hidden" id="selectedValue" name="valuePoint" value="3">
-                        <input type="text" name="taskName" placeholder="Tasks" required>
-                        <button type="submit">Add Task</button>
+                        <input type="text" name="taskName" placeholder="Task Description" required class="task-name">
+                        <button type="submit" class="add-task-btn">
+                            <img src="{{ url_for('static', filename='assets/plus.png') }}" alt="Add Task" class="add-task-icon">
+                        </button>
                     </form>
                 </div>
-                <ul style="list-style: none; padding-top: 20px;" id="tasklist" class="task-list text-start ps-0 w-100">  
+                <ul id="tasklist" class="task-list text-start ps-0 w-100">  
                     {% for task in tasks %}               
                         <li data-points="{{ task.value_points }}">
-                            <input type="checkbox" class="task-checkbox" data-id="{{ task.id }}" {% if task.completed %}checked{%endif%}>  
-                            {% if task['value_points']|int == 3 %}
-                                <img src="{{ url_for('static', filename='assets/red.png') }}" width="20" height="20">
-                            {% elif task['value_points']|int == 2 %}
-                                <img src="{{ url_for('static', filename='assets/yellow.png') }}" width="20" height="20">
-                            {% else %}
-                                <img src="{{ url_for('static', filename='assets/green.png') }}" width="20" height="20">
-                            {% endif %}
-                            {{ task['name'] }} 
-                            <form method="post" action="/delete/{{ task.id }}" style="display: inline;">
-                                <button type="submit">Delete</button>
+                            <!-- Checkbox with label -->
+                            <label class="circle-checkbox">
+                                <input type="checkbox" class="task-checkbox" data-id="{{ task.id }}" {% if task.completed %}checked{% endif %}>
+                                <span class="checkmark {{ 
+                                    'high' if task.value_points == 3 
+                                    else 'medium' if task.value_points == 2 
+                                    else 'low' }}">
+                                </span>
+                                
+                                <!-- FIXED: Moved task content inside label -->
+                                <div class="task-content">
+                                    <span class="task-text">{{ task['name'] }}</span>
+                                </div>
+                            </label>
+                            
+                            <!-- FIXED: Delete button outside label, at end -->
+                            <form method="post" action="/delete/{{ task.id }}">
+                                <button type="submit" class="delete-task-btn">
+                                    <img src="{{ url_for('static', filename='assets/trash.png') }}" alt="Delete" class="delete-task-icon">
+                                </button>
                             </form>
                         </li>
                     {% endfor %}
