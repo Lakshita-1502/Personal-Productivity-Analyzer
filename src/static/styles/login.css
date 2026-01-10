@@ -1,0 +1,84 @@
+.login-card{
+   background-color: white;
+   height: 370px;
+   width: 400px;
+   border-radius: 15px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   margin: auto;
+   margin-top: 45px;
+}
+
+.login-header{
+   background-color: #0F172A;
+   color: white;
+   border-radius: 15px 15px 0 0;
+   padding: 20px;
+   text-align: center;
+}
+
+.form-content{
+   padding: 30px;
+}
+
+.form-content input:focus{
+   border-color: #555;
+   outline: none;
+   box-shadow: 0 0 0 1px #555;
+}
+
+input:focus {
+  border-color: #555;
+  outline: none;
+  box-shadow: 0 0 0 1px #555;
+}
+
+
+.login-btn{
+   background-color: black;
+   color: white;
+   border: none;
+   border-radius: 8px;
+   font-size: 20px;
+   text-align: center;
+   height: 50px;
+   margin-top: 20px;
+   width: 100%;
+}
+
+.login-btn:hover{
+   background-color: #333333;
+}
+
+.register-card{
+   background-color: white;
+   height: 460px;
+   width: 500px;
+   border-radius: 15px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   margin: auto;
+   margin-top: 20px;
+}
+
+.register-header{
+   background-color: #0F172A;
+   color: white;
+   border-radius: 15px 15px 0 0;
+   padding: 20px;
+   text-align: center;
+}
+
+.register-btn{
+   background-color: black;
+   color: white;
+   border: none;
+   border-radius: 8px;
+   font-size: 20px;
+   text-align: center;
+   height: 50px;
+   margin-top: 20px;
+   width: 100%;
+}
+
+.register-btn:hover{
+   background-color: #333333;
+}
