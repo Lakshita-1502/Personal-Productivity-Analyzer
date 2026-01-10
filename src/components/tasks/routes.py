@@ -4,10 +4,12 @@ from components.auth.routes import login_required
 
 tasks_bp = Blueprint("tasks", __name__)
 
+# Home route
 @tasks_bp.route("/")
 def home():
     return render_template("pages/dashboard.html", page="dashboard")    
 
+# Add task route
 @tasks_bp.route("/add-task", methods=["GET", "POST"])
 @login_required
 def taskForm():   
@@ -33,6 +35,7 @@ def taskForm():
     finally:
         cursor.close()
 
+# Update task route
 @tasks_bp.route("/update", methods=["POST"])
 @login_required  
 def update():
@@ -52,6 +55,7 @@ def update():
     finally:
         cursor.close()
 
+# Delete task route
 @tasks_bp.route("/delete/<int:task_id>", methods=["POST"])
 @login_required 
 def delete_task(task_id):

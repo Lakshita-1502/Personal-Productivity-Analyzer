@@ -1,3 +1,4 @@
+/* Hero section */
 .hero-section{
   padding-top: 40px;
 }
@@ -41,6 +42,7 @@
   height: 330px;
 }
 
+/* Workflow section */
 .workflow{
   background-color: white;
   border-radius: 20px;
@@ -121,6 +123,7 @@
   line-height: 1.7;
 }
 
+/* Functions section */
 .functions{
   text-align: center;
   margin-top: 80px;
@@ -165,6 +168,7 @@
   line-height: 1.7;
 }
 
+/* Login section */
 .login-section{
   background-color: #0F172A;
   color: white;

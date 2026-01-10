@@ -1,3 +1,4 @@
+/* Logo Name */
 .logo-name{
   font-family: 'Poppins', sans-serif;
   font-style: bold;
@@ -10,6 +11,7 @@
   text-decoration: none;
 }
 
+/* Buttons */
 .registerButton{
   background-color: black;
   color: white
@@ -63,6 +65,6 @@
 .user-name:active {
   color: #000;
   background-color: transparent;
-  box-shadow: none;        /* removes blue glow */
-  outline: none;           /* removes focus ring */
+  box-shadow: none;        
+  outline: none;        
 }

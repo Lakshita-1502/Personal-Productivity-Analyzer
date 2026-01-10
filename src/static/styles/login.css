@@ -1,3 +1,4 @@
+/* Login section */
 .login-card{
    background-color: white;
    height: 370px;
@@ -32,7 +33,6 @@ input:focus {
   box-shadow: 0 0 0 1px #555;
 }
 
-
 .login-btn{
    background-color: black;
    color: white;
@@ -49,6 +49,7 @@ input:focus {
    background-color: #333333;
 }
 
+/* Register section */
 .register-card{
    background-color: white;
    height: 460px;

@@ -4,6 +4,7 @@ from functools import wraps
 
 auth_bp = Blueprint("auth", __name__)
 
+# Login required decorator
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -13,6 +14,7 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+# Login route
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
     if "user_id" in session:
@@ -44,6 +46,7 @@ def login():
             cursor.close()
     return render_template('pages/login.html')
 
+# Registration route
 @auth_bp.route("/register", methods=["GET", "POST"])
 def register():
     if 'user_id' in session:
@@ -83,6 +86,7 @@ def register():
     
     return render_template('pages/register.html')
 
+# Logout route
 @auth_bp.route("/logout", methods=["POST"])
 def logout():
     user_id = session.pop("user_id", None)
@@ -95,6 +99,7 @@ def logout():
     response.set_cookie('session', '', expires=0)
     return response
 
+# Profile route
 @auth_bp.route("/profile")
 @login_required
 def profile():

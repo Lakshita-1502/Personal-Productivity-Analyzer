@@ -15,6 +15,7 @@ import os
 
 email_bp = Blueprint("email", __name__)
 
+# Send email route
 @email_bp.route("/send-email", methods=["POST"])
 def send_email():
     data=request.get_json()

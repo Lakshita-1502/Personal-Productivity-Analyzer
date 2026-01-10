@@ -1,5 +1,4 @@
-/* tasks.css - FIXED VERSION */
-
+/* Task card */
 .task-card {
   background: #ffffff;
   border-radius: 16px;
@@ -8,6 +7,7 @@
   width: 750px;
 }
 
+/* Delete button */
 .delete-task-btn {
   border: none;
   background: transparent;
@@ -28,6 +28,7 @@
   height: 18px;
 }
 
+/* Task list */
 .task-list {
   text-align: left;   
   margin-left: 0;
@@ -43,7 +44,6 @@
   position: relative;
 }
 
-/* Underline after each task */
 .task-list li::after {
   content: "";
   position: absolute;
@@ -58,7 +58,6 @@
   margin-left: auto;
 }
 
-/* FIXED: Task content container */
 .task-content {
   display: flex;
   align-items: center;
@@ -75,7 +74,6 @@
   padding-left: 10px;
 }
 
-/* Checkbox styles */
 .circle-checkbox {
   display: inline-flex;
   align-items: center;
@@ -87,7 +85,6 @@
   display: none;
 }
 
-/* Outer circle */
 .circle-checkbox .checkmark {
   width: 20px;
   height: 20px;
@@ -100,7 +97,6 @@
   flex-shrink: 0;
 }
 
-/* Priority colors */
 .checkmark.high {
   border-color: #EF4444;
   color: #EF4444;
@@ -116,13 +112,11 @@
   color: #3B82F6;
 }
 
-/* Filled background when checked */
 .circle-checkbox input:checked + .checkmark {
   background-color: currentColor;
   border-color: currentColor;
 }
 
-/* Show tick when checked */
 .circle-checkbox input:checked + .checkmark::after {
   content: "";
   width: 4px;
@@ -134,15 +128,104 @@
   margin-top: -2px;
 }
 
-/* Hover feedback */
 .circle-checkbox:hover .checkmark {
   transform: scale(1.15);
 }
 
-/* Strike-through text when checked */
 .circle-checkbox input:checked ~ .task-content .task-text {
   text-decoration: line-through;
   opacity: 0.5;
   color: #9ca3af;
+}
+
+.task-form {
+  margin-left: 20px;
+}
+
+.priority-dot{
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-block
+}
+
+.priority-dot.high{
+  background-color: #EF4444;
+}
+
+.priority-dot.medium{
+  background-color: #F59E0B;
+}
+
+.priority-dot.low{
+  background-color: #3B82F6;
+}
+
+.priority-toggle::after {
+  margin-left: 3px;
+  border-top-color: #64748b;   
+  transition: transform 0.2s ease, border-top-color 0.2s ease;
+}
+
+.priority-toggle[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+  border-top-color: #0f172a;
+}
+
+.priority-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.compact-dropdown {
+  min-width: auto;       
+  width: auto;
+  padding: 0.25rem;
+}
+
+.compact-dropdown .dropdown-item {
+  padding: 0.25rem;       
+  display: flex;
+  justify-content: center;
+}
+
+.compact-dropdown img {
+  display: block;
+}
+
+.task-name {
+  border: none;                       
+  border-bottom: 2px solid #64748b; 
+  outline: none;                     
+  box-shadow: none;                 
+  font-size: 16px;
+  padding: 4px 8px;
+  width: 600px;
+}
+
+.task-name:focus {
+  border: none;                      
+  border-bottom: 2px solid #64748b;   
+  outline: none;
+  box-shadow: none;
+}
+
+.add-task-btn {
+  border: none;
+  background: transparent;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.add-task-btn:hover {
+  opacity: 0.85;
+}
+
+.add-task-icon {
+  width: 16px;     
+  height: 16px;
 }
 
